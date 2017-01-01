@@ -22,11 +22,13 @@ impl Philosopher {
     }
     fn eat(&self, table: &Table) {
         let _left = table.forks[self.left].lock().unwrap();
-        thread::sleep(Duration::from_millis(150));
+        thread::sleep(Duration::from_millis(1000));
+        println!("{} is get lock {}.", self.name, self.left);
         let _right = table.forks[self.right].lock().unwrap();
+        println!("{} is get lock {}.", self.name, self.right);
 
         println!("{} is eating.", self.name);
-        thread::sleep(Duration::from_millis(1000));
+        thread::sleep(Duration::from_millis(2000));
         println!("{} is done eating.", self.name);
     }
 }
