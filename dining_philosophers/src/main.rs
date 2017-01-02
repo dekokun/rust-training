@@ -22,9 +22,8 @@ impl Philosopher {
     }
     fn eat(&self, table: &Table) {
         let _left = table.forks[self.left].lock().unwrap();
-        thread::sleep(Duration::from_millis(1000));
-        println!("{} is get lock {}.", self.name, self.left);
         let _right = table.forks[self.right].lock().unwrap();
+        println!("{} is get lock {}.", self.name, self.left);
         println!("{} is get lock {}.", self.name, self.right);
 
         println!("{} is eating.", self.name);
@@ -46,6 +45,7 @@ fn main() {
         .map(|p| {
             let table = table.clone();
             thread::spawn(move || {
+                thread::sleep(Duration::from_millis(110));
                 p.eat(&table);
             })
         })
